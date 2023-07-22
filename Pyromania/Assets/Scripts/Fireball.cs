@@ -30,7 +30,7 @@ public class Fireball : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer != 3)
+        if (collision.gameObject.layer == 7)
         {
             Destroy(gameObject);
         }

@@ -6,26 +6,41 @@ public class Enemy : MonoBehaviour
 {
     private Player player;
     private Animator animator;
-
-    public Sprite fireSprite;
+    private EnemyHealthBar healthBar;
 
     public float maxHealth = 50;
     public float health;
+    public float attackDamage = 10;
+    public float expValue = 10;
 
-    bool onFire = false;
-    int fireSpreadCount = 0;
+    public bool exposedToFire = false;
+    public bool immuneToFire = false;
+    public bool onFire = false;
+    public int fireSpreadCount = 0;
+    public float catchTime = 1;
+    private float catchTimer = 0;
+    public float burnDuration = 2;
+    private float burnTimer = 0;
+    public float immunityDuration = 0.25f;
+    public float immunityTimer = 0;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player").GetComponent<Player>();
         animator = gameObject.GetComponent<Animator>();
+        healthBar = GetComponentInChildren<EnemyHealthBar>();
 
         health = maxHealth;
+        healthBar.UpdateHealthBar(health, maxHealth);
     }
 
     // Update is called once per frame
     void Update()
     {
+        ImmunitySeconds();
+        ExposedToFire();
+        SpreadFire();
+        HealthBarPatch();
         Burn();
         Death();
     }
@@ -35,10 +50,52 @@ public class Enemy : MonoBehaviour
         HitByFireball(collision);
     }
 
+    void ExposedToFire()
+    {
+        if (exposedToFire && !onFire)
+        {
+            if (catchTimer >= catchTime)
+            {
+                CatchFire();
+                catchTimer = 0;
+            }
+            catchTimer += Time.deltaTime;
+        }
+    }
+
+    void SpreadFire()
+    {
+        if (onFire && fireSpreadCount < player.maxFireSpreadTimes)
+        {
+            Collider2D[] nearbyEnemies = Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), player.fireSpreadDistance);
+            for (int i = 0; i < nearbyEnemies.Length; i++)
+            {
+                if (nearbyEnemies[i].gameObject.layer == 7)
+                {
+                    Enemy enemy = nearbyEnemies[i].gameObject.GetComponent<Enemy>();
+                    if (!enemy.exposedToFire && !enemy.onFire && !enemy.immuneToFire)
+                    {
+                        enemy.exposedToFire = true;
+                        enemy.fireSpreadCount = fireSpreadCount + 1;
+                    }
+                }
+            }
+        }
+    }
+
+    void HealthBarPatch()
+    {
+        if (healthBar.healthBar.maxValue != 1)
+        {
+            healthBar.healthBar.maxValue = 1;
+        }
+    }
+
     void Death()
     {
         if (health <= 0)
         {
+            player.RaiseExp(expValue);
             Destroy(gameObject);
         }
     }
@@ -47,7 +104,33 @@ public class Enemy : MonoBehaviour
     {
         if (onFire)
         {
+            StopFire();
             TakeDamage(player.burnDamage * Time.deltaTime);
+        }
+    }
+
+    void StopFire()
+    {
+        if (burnTimer >= burnDuration)
+        {
+            onFire = false;
+            animator.SetTrigger("NotOnFire");
+            burnTimer = 0;
+            immuneToFire = true;
+        }
+        burnTimer += Time.deltaTime;
+    }
+    
+    void ImmunitySeconds()
+    {
+        if (immuneToFire)
+        {
+            if (immunityTimer >= immunityDuration)
+            {
+                immuneToFire = false;
+                immunityTimer = 0;
+            }
+            immunityTimer += Time.deltaTime;
         }
     }
 
@@ -55,7 +138,10 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.layer == 6)
         {
-            catchFire(collision);
+            fireSpreadCount = 0;
+            immuneToFire = false;
+            immunityTimer = 0;
+            CatchFire();
             TakeDamage(player.fireballDamage);
         }
     }
@@ -63,13 +149,13 @@ public class Enemy : MonoBehaviour
     void TakeDamage(float damageValue)
     {
         health -= damageValue;
+        healthBar.UpdateHealthBar(health, maxHealth);
     }
 
-    void catchFire(Collider2D collision)
+    void CatchFire()
     {
         onFire = true;
-        fireSpreadCount = player.maxFireSpreadTimes;
+        exposedToFire = false;
         animator.SetTrigger("OnFire");
-        gameObject.GetComponent<SpriteRenderer>().sprite = fireSprite;
     }
 }
