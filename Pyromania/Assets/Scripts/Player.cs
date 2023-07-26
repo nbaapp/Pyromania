@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
     UIManager UI;
     Logic logic;
+    EnemySpawner spawner;
     public GameObject fireball;
     private Camera myCamera;
 
@@ -55,6 +56,7 @@ public class Player : MonoBehaviour
         logic = GameObject.Find("Logic").GetComponent<Logic>();
         rb = gameObject.GetComponent<Rigidbody2D>();
         myCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        spawner = GameObject.Find("Enemy Spawner").GetComponent<EnemySpawner>();
 
         inputActions = new PlayerInputActions();
         inputActions.Player.Enable();
@@ -87,6 +89,15 @@ public class Player : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         HitEnemy(collision);
+        HitPaycorn(collision);
+    }
+
+    void HitPaycorn(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 8)
+        {
+            TakeDamage(collision.gameObject.GetComponent<Paycorn>().damage);
+        }
     }
 
     public void UpdateShootRate()
@@ -99,6 +110,7 @@ public class Player : MonoBehaviour
         level++;
         UI.SetLevelText(level);
         expToNextLevel *= 2;
+        spawner.UpdateSpawnRate();
         if (level % 2 == 1)
         {
             logic.LevelUpAttack();

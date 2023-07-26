@@ -11,8 +11,9 @@ public class UIManager : MonoBehaviour
     private TextMeshProUGUI levelText;
     public GameObject levelUpScreen;
 
-    private void Start()
+    private void Awake()
     {
+        
         healthBar = GameObject.Find("Player Health Bar").GetComponent<Slider>();
         expBar = GameObject.Find("EXP Bar").GetComponent<Slider>();
         levelText = GameObject.Find("Level Text").GetComponent<TextMeshProUGUI>();
@@ -20,17 +21,26 @@ public class UIManager : MonoBehaviour
 
     public void SetHealth(float health, float maxHealth)
     {
-        healthBar.value = health/maxHealth;
+        if (healthBar != null)
+        {
+            healthBar.value = health / maxHealth;
+        }
     }
 
     public void SetEXP(float exp, float maxExp)
     {
-        expBar.value = exp / maxExp;
+        if (expBar != null)
+        {
+            expBar.value = exp / maxExp;
+        }
     }
 
     public void SetLevelText(int level)
     {
-        levelText.text = "LV " + level;
+        if (levelText != null)
+        {
+            levelText.text = "LV " + level;
+        }
     }
 
     public void LevelUpScreenOn()

@@ -7,7 +7,7 @@ public class EnemySpawner : MonoBehaviour
     private GameObject player;
     public GameObject nevergreen;
 
-    public float spawnDelay = 5;
+    public float spawnDelay;
     private float spawnTimer = 0;
     public float deadZoneRadius = 20;
     public float minSpwanPoint = 20;
@@ -16,6 +16,7 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
+        UpdateSpawnRate();
         SpawnEnemy();
     }
 
@@ -23,6 +24,11 @@ public class EnemySpawner : MonoBehaviour
     void Update()
     {
         SpawnTimer();
+    }
+
+    public void UpdateSpawnRate()
+    {
+        spawnDelay = 1.0f/(player.GetComponent<Player>().level);
     }
 
     void SpawnTimer()
@@ -43,8 +49,8 @@ public class EnemySpawner : MonoBehaviour
 
         do
         {
-            xPoint = Random.Range(minSpwanPoint, maxSpawnPoint);
-            yPoint = Random.Range(minSpwanPoint, maxSpawnPoint);
+            xPoint = Random.Range(player.transform.position.x + minSpwanPoint, player.transform.position.x + maxSpawnPoint);
+            yPoint = Random.Range(player.transform.position.y + minSpwanPoint, player.transform.position.y + maxSpawnPoint);
             spawnPoint = new Vector3(xPoint, yPoint, 0);
         } while (Vector3.Distance(spawnPoint, player.transform.position) < deadZoneRadius);
 

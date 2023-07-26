@@ -79,12 +79,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1493119843, guid: 88adc67a6c0410b4bb77a371b7bb3b1f, type: 3}
+  m_Sprite: {fileID: -1770442312, guid: 88adc67a6c0410b4bb77a371b7bb3b1f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 12.17, y: 9.66}
+  m_Size: {x: 2.96, y: 5.41}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -102,9 +102,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61a9b375f1c033e439b42eaa0c464a57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthDrop: {fileID: 6020537911674916530, guid: 0ab0fe0d921a8f8458eca89e681304be, type: 3}
   maxHealth: 50
   health: 0
   attackDamage: 30
+  expValue: 10
+  healthSpawnChance: 0.1
   exposedToFire: 0
   immuneToFire: 0
   onFire: 0
@@ -125,6 +128,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13c04a1ede519ef44963100fb1f8511b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eyes:
+  - {fileID: 4671417391624339469, guid: 27412e3b47eca1a4793afcd80ddc35c6, type: 3}
+  - {fileID: 2862911580951982879, guid: a487f056c6550074fa6b524b27a9eb23, type: 3}
+  - {fileID: 1662201693835840813, guid: 26fca53410855114795ba317503f468f, type: 3}
+  - {fileID: 6183056303643843181, guid: 80da0062423358b48bcad15926aa5a10, type: 3}
+  - {fileID: 6434620159232503054, guid: 94c093fc96345b7499148f550d2608bd, type: 3}
+  mouths:
+  - {fileID: 3680230055605806567, guid: d24053d543794b34c83acd2168ad02c5, type: 3}
+  - {fileID: 8108325061516246553, guid: dabd9a42f717383429a51ca9cc3ba865, type: 3}
+  - {fileID: 7674886837525140905, guid: 6e582711c55db394d8ade21a84996626, type: 3}
+  - {fileID: 1308074933352027225, guid: b45370a6122d355478464b3ff79dc00e, type: 3}
+  - {fileID: 3309621491303379765, guid: db9683b6361b36d438eeedbe34650c32, type: 3}
   moveSpeed: 5
 --- !u!61 &103682862892825623
 BoxCollider2D:
@@ -139,12 +154,12 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.17}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 2.94, y: 4.36}
-    newSize: {x: 12.17, y: 9.66}
+    newSize: {x: 2.96, y: 5.41}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -268,7 +283,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 6.000001, y: -124.00015}
+  m_AnchoredPosition: {x: -0.49, y: -124.00015}
   m_SizeDelta: {x: 147.72, y: 37.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6648611384758742903

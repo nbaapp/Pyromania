@@ -120,8 +120,8 @@ TextureImporter:
       name: Nevergreen(walking on fire)png_0
       rect:
         serializedVersion: 2
-        x: 140
-        y: 265
+        x: 58
+        y: 7
         width: 296
         height: 541
       alignment: 0
@@ -131,8 +131,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 04c412c75b9ff23458ccbf39f1c3e401
-      internalID: 1792313595
+      spriteID: 6beccd8a78484f54889fb8f27febfc3a
+      internalID: -2134575362
       vertices: []
       indices: 
       edges: []
@@ -141,8 +141,8 @@ TextureImporter:
       name: Nevergreen(walking on fire)png_1
       rect:
         serializedVersion: 2
-        x: 718
-        y: 271
+        x: 516
+        y: 4
         width: 295
         height: 541
       alignment: 0
@@ -152,8 +152,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e5660423172c3dc4996deed13b26c4df
-      internalID: -826647655
+      spriteID: 4bd4cec73dee1c84bb15926d37891df7
+      internalID: 446635139
       vertices: []
       indices: 
       edges: []
@@ -169,8 +169,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Nevergreen(walking on fire)png_0: 1792313595
-      Nevergreen(walking on fire)png_1: -826647655
+      Nevergreen(walking on fire)png_0: -2134575362
+      Nevergreen(walking on fire)png_1: 446635139
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

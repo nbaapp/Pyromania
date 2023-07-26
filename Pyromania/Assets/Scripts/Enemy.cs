@@ -7,11 +7,15 @@ public class Enemy : MonoBehaviour
     private Player player;
     private Animator animator;
     private EnemyHealthBar healthBar;
+    public GameObject healthDrop;
 
     public float maxHealth = 50;
     public float health;
     public float attackDamage = 10;
-    public float expValue = 10;
+    public float expValue;
+
+    private bool willSpawnHealth;
+    public float healthSpawnChance = 0.1f;
 
     public bool exposedToFire = false;
     public bool immuneToFire = false;
@@ -30,8 +34,11 @@ public class Enemy : MonoBehaviour
         animator = gameObject.GetComponent<Animator>();
         healthBar = GetComponentInChildren<EnemyHealthBar>();
 
+        expValue = maxHealth / 5;
+
         health = maxHealth;
         healthBar.UpdateHealthBar(health, maxHealth);
+        WillSpawnHealth();
     }
 
     // Update is called once per frame
@@ -43,6 +50,18 @@ public class Enemy : MonoBehaviour
         HealthBarPatch();
         Burn();
         Death();
+    }
+
+    private void WillSpawnHealth()
+    {
+        if (Random.value <= healthSpawnChance)
+        {
+            willSpawnHealth = true;
+        }
+        else
+        {
+            willSpawnHealth = false;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -96,6 +115,10 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             player.RaiseExp(expValue);
+            if (willSpawnHealth)
+            {
+                Instantiate(healthDrop, transform.position, Quaternion.identity);
+            }
             Destroy(gameObject);
         }
     }

@@ -131,8 +131,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7ba5ce4891803cc42906ec0854822732
-      internalID: -1493119843
+      spriteID: 3db03d7d585d50143b394d42d5798200
+      internalID: -1770442312
       vertices: []
       indices: 
       edges: []
@@ -152,8 +152,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b571fb707f8f84446bd2921350c6c6c7
-      internalID: -2133382813
+      spriteID: 1a9f8db46d5d7104b9a47f5bfec87162
+      internalID: -60596677
       vertices: []
       indices: 
       edges: []
@@ -169,8 +169,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Nevergreen(walking)_0: -1493119843
-      Nevergreen(walking)_1: -2133382813
+      Nevergreen(walking)_0: -1770442312
+      Nevergreen(walking)_1: -60596677
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
