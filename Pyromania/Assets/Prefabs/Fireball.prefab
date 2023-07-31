@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveDirection: {x: 0, y: 0}
   moveSpeed: 50
-  lifetime: 3
+  lifetime: 2
 --- !u!58 &8627544314616219465
 CircleCollider2D:
   m_ObjectHideFlags: 0

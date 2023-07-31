@@ -103,10 +103,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthDrop: {fileID: 6020537911674916530, guid: 0ab0fe0d921a8f8458eca89e681304be, type: 3}
+  sfx: {fileID: 0}
   maxHealth: 50
   health: 0
   attackDamage: 30
   expValue: 10
+  expMultiplier: 1
   healthSpawnChance: 0.1
   exposedToFire: 0
   immuneToFire: 0
@@ -140,7 +142,7 @@ MonoBehaviour:
   - {fileID: 7674886837525140905, guid: 6e582711c55db394d8ade21a84996626, type: 3}
   - {fileID: 1308074933352027225, guid: b45370a6122d355478464b3ff79dc00e, type: 3}
   - {fileID: 3309621491303379765, guid: db9683b6361b36d438eeedbe34650c32, type: 3}
-  moveSpeed: 5
+  moveSpeed: 7
 --- !u!61 &103682862892825623
 BoxCollider2D:
   m_ObjectHideFlags: 0

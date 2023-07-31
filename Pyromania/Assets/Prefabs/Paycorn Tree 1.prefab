@@ -246,7 +246,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6056393554957167669}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.9807005, y: 0.012690067, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1.3712, y: 1.3712, z: 1.3712}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -359,18 +359,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthDrop: {fileID: 6020537911674916530, guid: 0ab0fe0d921a8f8458eca89e681304be, type: 3}
+  sfx: {fileID: 0}
   maxHealth: 50
   health: 50
   attackDamage: 10
   expValue: 10
+  expMultiplier: 1.5
   healthSpawnChance: 0.1
   exposedToFire: 0
   immuneToFire: 0
-  onFire: 1
+  onFire: 0
   fireSpreadCount: 1
   catchTime: 1
   burnDuration: 2
-  immunityDuration: 0.25
+  immunityDuration: 0.5
   immunityTimer: 0
 --- !u!95 &5800038182815340062
 Animator:

@@ -10,7 +10,9 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
     UIManager UI;
     Logic logic;
+    SFXPlayer sfx;
     EnemySpawner spawner;
+    public Enemy enemy;
     public GameObject fireball;
     private Camera myCamera;
 
@@ -57,6 +59,7 @@ public class Player : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
         myCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         spawner = GameObject.Find("Enemy Spawner").GetComponent<EnemySpawner>();
+        sfx = GameObject.Find("SFX Player").GetComponent<SFXPlayer>();
 
         inputActions = new PlayerInputActions();
         inputActions.Player.Enable();
@@ -79,6 +82,7 @@ public class Player : MonoBehaviour
         ControllerAim();
         Shoot();
         Timers();
+        Death();
     }
 
     private void FixedUpdate()
@@ -100,6 +104,14 @@ public class Player : MonoBehaviour
         }
     }
 
+    void Death()
+    {
+        if(health <= 0)
+        {
+            logic.GameOver();
+        }
+    }
+
     public void UpdateShootRate()
     {
         shootDelay = 1 / shootRateModifier;
@@ -110,11 +122,16 @@ public class Player : MonoBehaviour
         level++;
         UI.SetLevelText(level);
         expToNextLevel *= 2;
+
         spawner.UpdateSpawnRate();
+        spawner.IncreaseEnemyHealthAndExp();
+
+        logic.LevelUpHealth();
         if (level % 2 == 1)
         {
             logic.LevelUpAttack();
         }
+
         UI.LevelUpScreenOn();
     }
 
@@ -254,6 +271,7 @@ public class Player : MonoBehaviour
                     fireball8.GetComponent<Fireball>().moveDirection = Quaternion.Euler(0, 0, -90) * aimDirection;
                 }
                 canShoot = false;
+                sfx.PlayShootFireballSFX();
             }
         }
     }

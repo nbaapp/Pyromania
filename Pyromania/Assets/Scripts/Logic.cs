@@ -1,16 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Logic : MonoBehaviour
 {
     private Player player;
     private UIManager UI;
+    public GameObject gameOverScreen;
 
     private void Start()
     {
         player = GameObject.Find("Player").GetComponent<Player>();
         UI = GameObject.Find("UI Manager").GetComponent<UIManager>();
+        Time.timeScale = 1;
+    }
+
+    public void ResetGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void GameOver()
+    {
+        gameOverScreen.SetActive(true);
+        Time.timeScale = 0;
     }
 
     public void LevelUpHealth()

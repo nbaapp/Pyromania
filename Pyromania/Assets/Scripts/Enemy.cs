@@ -8,11 +8,13 @@ public class Enemy : MonoBehaviour
     private Animator animator;
     private EnemyHealthBar healthBar;
     public GameObject healthDrop;
+    public SFXPlayer sfx;
 
     public float maxHealth = 50;
     public float health;
     public float attackDamage = 10;
     public float expValue;
+    public float expMultiplier;
 
     private bool willSpawnHealth;
     public float healthSpawnChance = 0.1f;
@@ -33,8 +35,9 @@ public class Enemy : MonoBehaviour
         player = GameObject.Find("Player").GetComponent<Player>();
         animator = gameObject.GetComponent<Animator>();
         healthBar = GetComponentInChildren<EnemyHealthBar>();
+        sfx = GameObject.Find("SFX Player").GetComponent<SFXPlayer>();
 
-        expValue = maxHealth / 5;
+        expValue = (maxHealth / 5) * expMultiplier;
 
         health = maxHealth;
         healthBar.UpdateHealthBar(health, maxHealth);
@@ -119,6 +122,7 @@ public class Enemy : MonoBehaviour
             {
                 Instantiate(healthDrop, transform.position, Quaternion.identity);
             }
+            sfx.PlayEnemyDeathSFX();
             Destroy(gameObject);
         }
     }
@@ -180,5 +184,6 @@ public class Enemy : MonoBehaviour
         onFire = true;
         exposedToFire = false;
         animator.SetTrigger("OnFire");
+        sfx.PlayEnemyCatchFireSFX();
     }
 }

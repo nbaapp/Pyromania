@@ -17,6 +17,8 @@ public class Paycorn : MonoBehaviour
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+
+        rb.angularVelocity = 100 * (Random.Range(0, 2) * 2 - 1);
     }
 
     // Update is called once per frame
